@@ -4,10 +4,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
+    public enum PlayerType
+    {
+        Player1,
+        Player2
+    }
+
+    [SerializeField]
+    private PlayerType playerType;
+
     private PlayerControls controls;
 
     public event Action<Vector2> OnMove;
-
     public event Action OnPush;
 
     private void Awake()
@@ -19,19 +27,22 @@ public class PlayerInputHandler : MonoBehaviour
     {
         controls.Enable();
 
-        controls.Player1.Move.performed += MovePerformed;
-        controls.Player1.Move.canceled += MovePerformed;
-
-        controls.Player1.Push.performed += PushPerformed;
+        if (playerType == PlayerType.Player1)
+        {
+            controls.Player1.Move.performed += MovePerformed;
+            controls.Player1.Move.canceled += MovePerformed;
+            controls.Player1.Push.performed += PushPerformed;
+        }
+        else
+        {
+            controls.Player2.Move.performed += MovePerformed;
+            controls.Player2.Move.canceled += MovePerformed;
+            controls.Player2.Push.performed += PushPerformed;
+        }
     }
 
     private void OnDisable()
     {
-        controls.Player1.Move.performed -= MovePerformed;
-        controls.Player1.Move.canceled -= MovePerformed;
-
-        controls.Player1.Push.performed -= PushPerformed;
-
         controls.Disable();
     }
 
