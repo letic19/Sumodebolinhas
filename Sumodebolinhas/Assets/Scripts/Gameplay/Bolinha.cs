@@ -5,15 +5,15 @@ public class Bolinha : MonoBehaviour
     [SerializeField] private BolinhaData bolinhaData;
 
     private Rigidbody rb;
-
     private Vector2 moveInput;
-
     private PlayerInputHandler inputHandler;
-    
+
     [SerializeField] private Bolinha inimigo;
-    
-    [SerializeField] private float distanciaMaximaEmpurrao = 8f;
-    [SerializeField] private float multiplicadorMaximo = 2f;
+
+    private int moedas = 0;
+
+    private float bonusForca = 0f;
+    private float bonusResistencia = 0f;
 
     private void Awake()
     {
@@ -55,23 +55,28 @@ public class Bolinha : MonoBehaviour
             moveInput.y
         );
 
+        float velocidadeAtual = Mathf.Max(
+            bolinhaData.velocidade - (moedas * 0.5f),
+            bolinhaData.velocidade * 0.5f
+        );
+
         rb.AddForce(
-            movimento * bolinhaData.velocidade,
+            movimento * velocidadeAtual,
             ForceMode.Acceleration
         );
     }
+
     private void EmpurrarInimigo()
     {
-        Debug.Log(gameObject.name + " empurrou");
         if (inimigo == null)
             return;
 
         Rigidbody rbInimigo = inimigo.GetComponent<Rigidbody>();
 
-        Vector3 direcao = inimigo.transform.position - transform.position;
+        Vector3 direcao =
+            inimigo.transform.position - transform.position;
 
         direcao.y = 0f;
-
         direcao.Normalize();
 
         float distancia = Vector3.Distance(
@@ -79,14 +84,34 @@ public class Bolinha : MonoBehaviour
             inimigo.transform.position
         );
 
-        float forcaFinal = 8f / Mathf.Max(distancia, 1f);
-        
-        Debug.Log("Distância: " + distancia);
-        Debug.Log("Força: " + forcaFinal);
+        float forcaFinal =
+            (8f + bonusForca) /
+            Mathf.Max(distancia, 1f);
+
+        float resistenciaInimigo =
+            1f + inimigo.bonusResistencia;
 
         rbInimigo.AddForce(
-            direcao * forcaFinal,
+            direcao * (forcaFinal / resistenciaInimigo),
             ForceMode.Impulse
+        );
+
+        Debug.Log(gameObject.name + " empurrou");
+        Debug.Log("Distância: " + distancia);
+        Debug.Log("Força Final: " + forcaFinal);
+    }
+
+    public void ColetarMoeda()
+    {
+        moedas++;
+
+        bonusForca += 1f;
+        bonusResistencia += 0.5f;
+
+        Debug.Log(
+            gameObject.name +
+            " Moedas: " +
+            moedas
         );
     }
 }
