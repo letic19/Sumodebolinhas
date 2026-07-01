@@ -1,17 +1,11 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BolinhaData", menuName = "Game/Bolinha")]
+[CreateAssetMenu(menuName = "Sumo/Bolinha Data")]
 public class BolinhaData : ScriptableObject
 {
-    public string bolinhaNome;
+    public float velocidade;
+    public float forcaEmpurrao;
+    public float tamanho;
 
-    public Sprite sprite;
-
-    public float tamanho = 1f;
-
-    public float velocidade = 5f;
-
-    public float forcaEmpurrao = 10f;
-
-    public Color corPadrao = Color.white;
+    public Sprite icone;
 }

@@ -9,6 +9,10 @@ public class Bolinha : MonoBehaviour
     private PlayerInputHandler inputHandler;
 
     [SerializeField] private Bolinha inimigo;
+    [SerializeField] private float tempoRecargaEmpurrao = 3f;
+
+    private bool podeEmpurrar = true;
+    private float tempoAtualRecarga = 0f;
 
     private int moedas = 0;
 
@@ -64,12 +68,28 @@ public class Bolinha : MonoBehaviour
             movimento * velocidadeAtual,
             ForceMode.Acceleration
         );
+        
+        if (!podeEmpurrar)
+        {
+            tempoAtualRecarga += Time.fixedDeltaTime;
+
+            if (tempoAtualRecarga >= tempoRecargaEmpurrao)
+            {
+                podeEmpurrar = true;
+                tempoAtualRecarga = 0f;
+            }
+        }
     }
 
     private void EmpurrarInimigo()
     {
         if (inimigo == null)
             return;
+        
+        if (!podeEmpurrar)
+            return;
+
+        podeEmpurrar = false;
 
         Rigidbody rbInimigo = inimigo.GetComponent<Rigidbody>();
 
@@ -113,5 +133,13 @@ public class Bolinha : MonoBehaviour
             " Moedas: " +
             moedas
         );
+    }
+    
+    public float GetPorcentagemRecarga()
+    {
+        if (podeEmpurrar)
+            return 1f;
+
+        return tempoAtualRecarga / tempoRecargaEmpurrao;
     }
 }
