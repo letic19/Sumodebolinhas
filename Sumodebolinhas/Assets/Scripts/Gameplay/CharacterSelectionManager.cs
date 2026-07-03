@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class CharacterSelectionManager : MonoBehaviour
 {
     [Header("Dados das Bolinhas")]
-    [SerializeField] private BolinhaData[] bolinhas;
+   [SerializeField] private BolinhaDatabase bancoDeBolinhas;
 
     [Header("Interface Jogador 1")]
     [SerializeField] private TMP_Text nomeBolinhaP1;
@@ -21,10 +21,13 @@ public class CharacterSelectionManager : MonoBehaviour
     private bool jogador1Confirmou = false;
     private bool jogador2Confirmou = false;
 
+    [Header("Painéis")]
+    [SerializeField] private GameObject painelJogador1;
+    [SerializeField] private GameObject painelJogador2;
+
     private void Start()
     {
         AtualizarInterfaceJogador1();
-        AtualizarInterfaceJogador2();
     }
 
     // ---------------- JOGADOR 1 ----------------
@@ -33,7 +36,7 @@ public class CharacterSelectionManager : MonoBehaviour
     {
         indiceJogador1++;
 
-        if (indiceJogador1 >= bolinhas.Length)
+        if (indiceJogador1 >= bancoDeBolinhas.bolinhas.Length)
             indiceJogador1 = 0;
 
         AtualizarInterfaceJogador1();
@@ -44,33 +47,23 @@ public class CharacterSelectionManager : MonoBehaviour
         indiceJogador1--;
 
         if (indiceJogador1 < 0)
-            indiceJogador1 = bolinhas.Length - 1;
+            indiceJogador1 = bancoDeBolinhas.bolinhas.Length - 1;
 
         AtualizarInterfaceJogador1();
     }
 
     private void AtualizarInterfaceJogador1()
     {
-        Debug.Log("Quantidade: " + bolinhas.Length);
+        Debug.Log("Quantidade: " + bancoDeBolinhas.bolinhas.Length);
         Debug.Log("Índice: " + indiceJogador1);
 
-        if (nomeBolinhaP1 == null)
-        {
-            Debug.LogError("NomeBolinhaP1 não foi configurado!");
-            return;
-        }
+        
 
-        if (bolinhas[indiceJogador1] == null)
-        {
-            Debug.LogError("Elemento da bolinha é nulo!");
-            return;
-        }
+        nomeBolinhaP1.text = bancoDeBolinhas.bolinhas[indiceJogador1].name;
 
-        nomeBolinhaP1.text = bolinhas[indiceJogador1].name;
-
-        if (imagemBolinhaP1 != null && bolinhas[indiceJogador1].icone != null)
+        if (imagemBolinhaP1 != null && bancoDeBolinhas.bolinhas[indiceJogador1].icone != null)
         {
-            imagemBolinhaP1.sprite = bolinhas[indiceJogador1].icone;
+            imagemBolinhaP1.sprite = bancoDeBolinhas.bolinhas[indiceJogador1].icone;
         }
 
         Debug.Log("Atualizou Jogador 1");
@@ -80,9 +73,12 @@ public class CharacterSelectionManager : MonoBehaviour
     {
         jogador1Confirmou = true;
 
-        Debug.Log("Jogador 1 escolheu: " + bolinhas[indiceJogador1].name);
+        Debug.Log("Jogador 1 escolheu: " + bancoDeBolinhas.bolinhas[indiceJogador1].name);
 
-        VerificarInicio();
+        AtualizarInterfaceJogador2();
+
+        painelJogador1.SetActive(false);
+        painelJogador2.SetActive(true);
     }
 
     // ---------------- JOGADOR 2 ----------------
@@ -91,7 +87,7 @@ public class CharacterSelectionManager : MonoBehaviour
     {
         indiceJogador2++;
 
-        if (indiceJogador2 >= bolinhas.Length)
+        if (indiceJogador2 >= bancoDeBolinhas.bolinhas.Length)
             indiceJogador2 = 0;
 
         AtualizarInterfaceJogador2();
@@ -102,24 +98,24 @@ public class CharacterSelectionManager : MonoBehaviour
         indiceJogador2--;
 
         if (indiceJogador2 < 0)
-            indiceJogador2 = bolinhas.Length - 1;
+            indiceJogador2 = bancoDeBolinhas.bolinhas.Length - 1;
 
         AtualizarInterfaceJogador2();
     }
 
     private void AtualizarInterfaceJogador2()
     {
-        nomeBolinhaP2.text = bolinhas[indiceJogador2].name;
+        nomeBolinhaP2.text = bancoDeBolinhas.bolinhas[indiceJogador2].name;
 
-        if (bolinhas[indiceJogador2].icone != null)
-            imagemBolinhaP2.sprite = bolinhas[indiceJogador2].icone;
+        if (bancoDeBolinhas.bolinhas[indiceJogador2].icone != null)
+            imagemBolinhaP2.sprite = bancoDeBolinhas.bolinhas[indiceJogador2].icone;
     }
 
     public void ConfirmarJogador2()
     {
         jogador2Confirmou = true;
 
-        Debug.Log("Jogador 2 escolheu: " + bolinhas[indiceJogador2].name);
+        Debug.Log("Jogador 2 escolheu: " + bancoDeBolinhas.bolinhas[indiceJogador2].name);
 
         VerificarInicio();
     }
