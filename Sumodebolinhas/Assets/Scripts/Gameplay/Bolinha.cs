@@ -3,7 +3,8 @@ using UnityEngine;
 public class Bolinha : MonoBehaviour
 {
     [SerializeField] private BolinhaData bolinhaData;
-
+    [SerializeField] private PlayerInputHandler.PlayerType playerType;
+    
     private Rigidbody rb;
     private Vector2 moveInput;
     private PlayerInputHandler inputHandler;
@@ -21,6 +22,15 @@ public class Bolinha : MonoBehaviour
 
     private void Awake()
     {
+        if (playerType == PlayerInputHandler.PlayerType.Player1)
+        {
+            bolinhaData = GameManager.Instance.bolinhaJogador1;
+        }
+        else
+        {
+            bolinhaData = GameManager.Instance.bolinhaJogador2;
+        }
+        
         rb = GetComponent<Rigidbody>();
 
         transform.localScale = Vector3.one * bolinhaData.tamanho;
@@ -105,7 +115,7 @@ public class Bolinha : MonoBehaviour
         );
 
         float forcaFinal =
-            (8f + bonusForca) /
+            (bolinhaData.forcaEmpurrao + bonusForca) /
             Mathf.Max(distancia, 1f);
 
         float resistenciaInimigo =

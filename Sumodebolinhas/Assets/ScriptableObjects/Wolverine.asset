@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b6fc37f85752a8459eef5771fe67989, type: 3}
-  m_Name: BolinhaVermelha
+  m_Name: Wolverine
   m_EditorClassIdentifier: Assembly-CSharp::BolinhaData
-  bolinhaNome: Flash
+  bolinhaNome: Wolverine
   sprite: {fileID: 0}
-  tamanho: 0.9
-  velocidade: 7
-  forcaEmpurrao: 8
-  corPadrao: {r: 1, g: 0, b: 0, a: 1}
+  tamanho: 0.8
+  velocidade: 8
+  forcaEmpurrao: 6
+  corPadrao: {r: 0.9670751, g: 1, b: 0, a: 1}

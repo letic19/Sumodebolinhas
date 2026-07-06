@@ -495,7 +495,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d4145f312285240924ff613df33ea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bolinha
-  bolinhaData: {fileID: 11400000, guid: 47dba6937dbbd474c866ae51b45f152f, type: 2}
+  bolinhaData: {fileID: 0}
+  playerType: 0
   inimigo: {fileID: 513970212}
   tempoRecargaEmpurrao: 3
 --- !u!114 &264503806
@@ -1031,7 +1032,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d4145f312285240924ff613df33ea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bolinha
-  bolinhaData: {fileID: 11400000, guid: 47dba6937dbbd474c866ae51b45f152f, type: 2}
+  bolinhaData: {fileID: 0}
+  playerType: 0
   inimigo: {fileID: 264503805}
   tempoRecargaEmpurrao: 3
 --- !u!1 &787300379

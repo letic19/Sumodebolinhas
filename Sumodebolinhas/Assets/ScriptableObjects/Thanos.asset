@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b6fc37f85752a8459eef5771fe67989, type: 3}
-  m_Name: BolinhaAmarelo
+  m_Name: Thanos
   m_EditorClassIdentifier: Assembly-CSharp::BolinhaData
-  bolinhaNome: Wolverine
+  bolinhaNome: Thanos
   sprite: {fileID: 0}
-  tamanho: 0.8
-  velocidade: 8
-  forcaEmpurrao: 6
-  corPadrao: {r: 0.9670751, g: 1, b: 0, a: 1}
+  tamanho: 1.3
+  velocidade: 4
+  forcaEmpurrao: 13
+  corPadrao: {r: 0.53877133, g: 0.035243843, b: 0.8301887, a: 1}

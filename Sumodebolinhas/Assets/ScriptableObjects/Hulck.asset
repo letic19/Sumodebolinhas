@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b6fc37f85752a8459eef5771fe67989, type: 3}
-  m_Name: BolinhaMarrom
+  m_Name: Hulck
   m_EditorClassIdentifier: Assembly-CSharp::BolinhaData
-  bolinhaNome: Groot
+  bolinhaNome: Huck
   sprite: {fileID: 0}
-  tamanho: 1
-  velocidade: 5
-  forcaEmpurrao: 10
-  corPadrao: {r: 0.5566038, g: 0.26814547, b: 0, a: 1}
+  tamanho: 1.5
+  velocidade: 3
+  forcaEmpurrao: 15
+  corPadrao: {r: 0.019935932, g: 0.6037736, b: 0.10070709, a: 1}

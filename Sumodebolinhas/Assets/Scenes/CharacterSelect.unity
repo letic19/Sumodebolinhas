@@ -812,7 +812,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: FLASH
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1101,7 +1101,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Flash
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1694,7 +1694,6 @@ GameObject:
   - component: {fileID: 848188864}
   - component: {fileID: 848188863}
   - component: {fileID: 848188862}
-  - component: {fileID: 848188865}
   m_Layer: 5
   m_Name: BotaoConfirmar
   m_TagString: Untagged
@@ -1816,25 +1815,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 848188860}
   m_CullTransparentMesh: 1
---- !u!114 &848188865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 848188860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8a66095f612e674c911ab7288c11d42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectionManager
-  bolinhas: []
-  nomeBolinhaP1: {fileID: 0}
-  imagemBolinhaP1: {fileID: 0}
-  nomeBolinhaP2: {fileID: 0}
-  imagemBolinhaP2: {fileID: 0}
-  painelJogador1: {fileID: 0}
-  painelJogador2: {fileID: 0}
 --- !u!1 &1147963975
 GameObject:
   m_ObjectHideFlags: 0
@@ -2884,7 +2864,6 @@ GameObject:
   - component: {fileID: 1568297097}
   - component: {fileID: 1568297096}
   - component: {fileID: 1568297095}
-  - component: {fileID: 1568297094}
   m_Layer: 5
   m_Name: BotaoProximo
   m_TagString: Untagged
@@ -2912,25 +2891,6 @@ RectTransform:
   m_AnchoredPosition: {x: 157, y: -139}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1568297094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1568297092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8a66095f612e674c911ab7288c11d42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectionManager
-  bolinhas: []
-  nomeBolinhaP1: {fileID: 0}
-  imagemBolinhaP1: {fileID: 0}
-  nomeBolinhaP2: {fileID: 0}
-  imagemBolinhaP2: {fileID: 0}
-  painelJogador1: {fileID: 0}
-  painelJogador2: {fileID: 0}
 --- !u!114 &1568297095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3191,12 +3151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a66095f612e674c911ab7288c11d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectionManager
-  bolinhas:
-  - {fileID: 11400000, guid: ee3f4a234f137104a8bbcbb2120b0b72, type: 2}
-  - {fileID: 11400000, guid: d05a8012000b1ef4d9458a12e4153b2c, type: 2}
-  - {fileID: 11400000, guid: 560eb60092768fb4eb03af03b36405de, type: 2}
-  - {fileID: 11400000, guid: 6f87d0938932a584da8ca6bc31e8b611, type: 2}
-  - {fileID: 11400000, guid: 947d814c310510448b0db9d89c050e78, type: 2}
+  bancoDeBolinhas: {fileID: 11400000, guid: f7a10abe6acba0040b917ea93296ab51, type: 2}
   nomeBolinhaP1: {fileID: 331921613}
   imagemBolinhaP1: {fileID: 1456868856}
   nomeBolinhaP2: {fileID: 467838434}
@@ -3213,6 +3168,52 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 588.0629, y: 236.55496, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1709261348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1709261350}
+  - component: {fileID: 1709261349}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1709261349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709261348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12044657567fe243a41827a8dd51b96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  bolinhaJogador1: {fileID: 0}
+  bolinhaJogador2: {fileID: 0}
+--- !u!4 &1709261350
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709261348}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 491.7298, y: 269.0011, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3364,3 +3365,4 @@ SceneRoots:
   - {fileID: 819085295}
   - {fileID: 1454232121}
   - {fileID: 1696301514}
+  - {fileID: 1709261350}

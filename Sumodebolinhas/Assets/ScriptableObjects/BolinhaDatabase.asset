@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BolinhaDatabase
   m_EditorClassIdentifier: Assembly-CSharp::BolinhaDatabase
   bolinhas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: ee3f4a234f137104a8bbcbb2120b0b72, type: 2}
+  - {fileID: 11400000, guid: d05a8012000b1ef4d9458a12e4153b2c, type: 2}
+  - {fileID: 11400000, guid: 560eb60092768fb4eb03af03b36405de, type: 2}
+  - {fileID: 11400000, guid: 6f87d0938932a584da8ca6bc31e8b611, type: 2}
+  - {fileID: 11400000, guid: 947d814c310510448b0db9d89c050e78, type: 2}

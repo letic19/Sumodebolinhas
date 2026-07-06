@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CharacterSelectionManager : MonoBehaviour
 {
@@ -27,13 +28,35 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("CharacterSelectionManager: " + gameObject.name);
+
         AtualizarInterfaceJogador1();
+        
+    }
+    
+    private void Awake()
+    {
+        Debug.Log("Awake: " + gameObject.name);
     }
 
     // ---------------- JOGADOR 1 ----------------
 
     public void ProximoJogador1()
     {
+        if (bancoDeBolinhas == null)
+        {
+            Debug.LogError("Banco de Bolinhas é NULL!");
+            return;
+        }
+
+        if (bancoDeBolinhas.bolinhas == null)
+        {
+            Debug.LogError("Array de bolinhas é NULL!");
+            return;
+        }
+
+        Debug.Log("Quantidade: " + bancoDeBolinhas.bolinhas.Length);
+
         indiceJogador1++;
 
         if (indiceJogador1 >= bancoDeBolinhas.bolinhas.Length)
@@ -54,17 +77,44 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private void AtualizarInterfaceJogador1()
     {
-        Debug.Log("Quantidade: " + bancoDeBolinhas.bolinhas.Length);
-        Debug.Log("Índice: " + indiceJogador1);
+        if (nomeBolinhaP1 == null)
+        {
+            Debug.LogError("NomeBolinhaP1 é NULL");
+            return;
+        }
 
-        
+        if (imagemBolinhaP1 == null)
+        {
+            Debug.LogError("ImagemBolinhaP1 é NULL");
+            return;
+        }
+
+        if (bancoDeBolinhas == null)
+        {
+            Debug.LogError("BancoDeBolinhas é NULL");
+            return;
+        }
+
+        if (bancoDeBolinhas.bolinhas == null)
+        {
+            Debug.LogError("Array de bolinhas é NULL");
+            return;
+        }
+
+        if (indiceJogador1 >= bancoDeBolinhas.bolinhas.Length)
+        {
+            Debug.LogError("Índice inválido");
+            return;
+        }
+
+        if (bancoDeBolinhas.bolinhas[indiceJogador1] == null)
+        {
+            Debug.LogError("Bolinha do índice " + indiceJogador1 + " é NULL");
+            return;
+        }
 
         nomeBolinhaP1.text = bancoDeBolinhas.bolinhas[indiceJogador1].name;
-
-        if (imagemBolinhaP1 != null && bancoDeBolinhas.bolinhas[indiceJogador1].icone != null)
-        {
-            imagemBolinhaP1.sprite = bancoDeBolinhas.bolinhas[indiceJogador1].icone;
-        }
+        imagemBolinhaP1.sprite = bancoDeBolinhas.bolinhas[indiceJogador1].icone;
 
         Debug.Log("Atualizou Jogador 1");
     }
@@ -72,7 +122,8 @@ public class CharacterSelectionManager : MonoBehaviour
     public void ConfirmarJogador1()
     {
         jogador1Confirmou = true;
-
+        
+        GameManager.Instance.bolinhaJogador1 = bancoDeBolinhas.bolinhas[indiceJogador1];
         Debug.Log("Jogador 1 escolheu: " + bancoDeBolinhas.bolinhas[indiceJogador1].name);
 
         AtualizarInterfaceJogador2();
@@ -114,19 +165,21 @@ public class CharacterSelectionManager : MonoBehaviour
     public void ConfirmarJogador2()
     {
         jogador2Confirmou = true;
-
+        
+        GameManager.Instance.bolinhaJogador2 = bancoDeBolinhas.bolinhas[indiceJogador2];
         Debug.Log("Jogador 2 escolheu: " + bancoDeBolinhas.bolinhas[indiceJogador2].name);
 
         VerificarInicio();
     }
-
-    // ---------------- VERIFICA ----------------
+    
 
     private void VerificarInicio()
     {
         if (jogador1Confirmou && jogador2Confirmou)
         {
             Debug.Log("Os dois jogadores confirmaram!");
+
+            SceneManager.LoadScene("Gameplay");
         }
     }
 }
