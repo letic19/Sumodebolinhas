@@ -22,6 +22,8 @@ public class Bolinha : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("Jogador: " + playerType);
+
         if (playerType == PlayerInputHandler.PlayerType.Player1)
         {
             bolinhaData = GameManager.Instance.bolinhaJogador1;
@@ -30,7 +32,9 @@ public class Bolinha : MonoBehaviour
         {
             bolinhaData = GameManager.Instance.bolinhaJogador2;
         }
-        
+
+        Debug.Log("Bolinha carregada: " + bolinhaData.name);
+
         rb = GetComponent<Rigidbody>();
 
         transform.localScale = Vector3.one * bolinhaData.tamanho;

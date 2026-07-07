@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6fc37f85752a8459eef5771fe67989, type: 3}
   m_Name: Hulck
   m_EditorClassIdentifier: Assembly-CSharp::BolinhaData
-  bolinhaNome: Huck
-  sprite: {fileID: 0}
-  tamanho: 1.5
-  velocidade: 3
-  forcaEmpurrao: 15
-  corPadrao: {r: 0.019935932, g: 0.6037736, b: 0.10070709, a: 1}
+  velocidade: 9.5
+  forcaEmpurrao: 16
+  tamanho: 1.4
+  icone: {fileID: 0}

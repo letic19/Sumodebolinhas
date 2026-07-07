@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6fc37f85752a8459eef5771fe67989, type: 3}
   m_Name: Grooth
   m_EditorClassIdentifier: Assembly-CSharp::BolinhaData
-  bolinhaNome: Groot
-  sprite: {fileID: 0}
-  tamanho: 1
-  velocidade: 5
-  forcaEmpurrao: 10
-  corPadrao: {r: 0.5566038, g: 0.26814547, b: 0, a: 1}
+  velocidade: 11
+  forcaEmpurrao: 13
+  tamanho: 1.2
+  icone: {fileID: 0}

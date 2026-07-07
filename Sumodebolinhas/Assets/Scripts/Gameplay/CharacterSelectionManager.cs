@@ -122,8 +122,10 @@ public class CharacterSelectionManager : MonoBehaviour
     public void ConfirmarJogador1()
     {
         jogador1Confirmou = true;
-        
-        GameManager.Instance.bolinhaJogador1 = bancoDeBolinhas.bolinhas[indiceJogador1];
+
+        GameManager.Instance.bolinhaJogador1 =
+            bancoDeBolinhas.bolinhas[indiceJogador1];
+
         Debug.Log("Jogador 1 escolheu: " + bancoDeBolinhas.bolinhas[indiceJogador1].name);
 
         AtualizarInterfaceJogador2();
@@ -132,7 +134,7 @@ public class CharacterSelectionManager : MonoBehaviour
         painelJogador2.SetActive(true);
     }
 
-    // ---------------- JOGADOR 2 ----------------
+
 
     public void ProximoJogador2()
     {
@@ -165,13 +167,15 @@ public class CharacterSelectionManager : MonoBehaviour
     public void ConfirmarJogador2()
     {
         jogador2Confirmou = true;
-        
-        GameManager.Instance.bolinhaJogador2 = bancoDeBolinhas.bolinhas[indiceJogador2];
+
+        GameManager.Instance.bolinhaJogador2 =
+            bancoDeBolinhas.bolinhas[indiceJogador2];
+
         Debug.Log("Jogador 2 escolheu: " + bancoDeBolinhas.bolinhas[indiceJogador2].name);
 
         VerificarInicio();
     }
-    
+
 
     private void VerificarInicio()
     {
