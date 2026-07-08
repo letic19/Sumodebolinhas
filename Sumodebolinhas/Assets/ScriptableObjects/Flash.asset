@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6fc37f85752a8459eef5771fe67989, type: 3}
   m_Name: Flash
   m_EditorClassIdentifier: Assembly-CSharp::BolinhaData
-  velocidade: 24
-  forcaEmpurrao: 7
+  velocidade: 17
+  forcaEmpurrao: 5
   tamanho: 0.8
   icone: {fileID: 0}

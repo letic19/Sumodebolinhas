@@ -154,4 +154,38 @@ public class Bolinha : MonoBehaviour
 
         return tempoAtualRecarga / tempoRecargaEmpurrao;
     }
+
+    public void Morrer()
+    {
+        if (playerType == PlayerInputHandler.PlayerType.Player1)
+        {
+            GameManager.Instance.vidasJogador1--;
+        }
+        else
+        {
+            GameManager.Instance.vidasJogador2--;
+        }
+
+        Debug.Log("Vidas J1: " + GameManager.Instance.vidasJogador1);
+        Debug.Log("Vidas J2: " + GameManager.Instance.vidasJogador2);
+
+        if (GameManager.Instance.vidasJogador1 <= 0)
+        {
+            Debug.Log("JOGADOR 2 VENCEU!");
+            return;
+        }
+
+        if (GameManager.Instance.vidasJogador2 <= 0)
+        {
+            Debug.Log("JOGADOR 1 VENCEU!");
+            return;
+        }
+
+        // Respawn
+        transform.position = Vector3.zero;
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+    }
 }
