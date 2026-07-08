@@ -24,10 +24,10 @@ public class CoinSpawner : MonoBehaviour
         float z = Random.Range(-limiteZ, limiteZ);
 
         Vector3 posicao = new Vector3(
-            x,
-            0.5f,
-            z
-        );
+     x,
+     3.32f,
+     z
+ );
 
         Instantiate(
             coinPrefab,
