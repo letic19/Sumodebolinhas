@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6fc37f85752a8459eef5771fe67989, type: 3}
   m_Name: Grooth
   m_EditorClassIdentifier: Assembly-CSharp::BolinhaData
-  velocidade: 11
-  forcaEmpurrao: 13
+  velocidade: 19
+  forcaEmpurrao: 8
   tamanho: 1.2
   icone: {fileID: 0}

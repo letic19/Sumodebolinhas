@@ -8,6 +8,8 @@ public class Coin : MonoBehaviour
 
         if (bolinha != null)
         {
+            bolinha.ColetarMoeda();
+
             Destroy(gameObject);
         }
     }

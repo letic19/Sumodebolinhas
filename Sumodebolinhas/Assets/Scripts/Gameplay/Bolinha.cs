@@ -99,7 +99,7 @@ public class Bolinha : MonoBehaviour
     {
         if (inimigo == null)
             return;
-        
+
         if (!podeEmpurrar)
             return;
 
@@ -107,10 +107,8 @@ public class Bolinha : MonoBehaviour
 
         Rigidbody rbInimigo = inimigo.GetComponent<Rigidbody>();
 
-        Vector3 direcao =
-            inimigo.transform.position - transform.position;
-
-        direcao.y = 0f;
+        Vector3 direcao = inimigo.transform.position - transform.position;
+        direcao.y = 0;
         direcao.Normalize();
 
         float distancia = Vector3.Distance(
@@ -118,21 +116,21 @@ public class Bolinha : MonoBehaviour
             inimigo.transform.position
         );
 
-        float forcaFinal =
-            (bolinhaData.forcaEmpurrao + bonusForca) /
-            Mathf.Max(distancia, 1f);
+        float forcaFinal = bolinhaData.forcaEmpurrao + bonusForca;
 
-        float resistenciaInimigo =
-            1f + inimigo.bonusResistencia;
+        float resistenciaInimigo = 1f + inimigo.bonusResistencia;
+
+        rbInimigo.linearVelocity = Vector3.zero;
 
         rbInimigo.AddForce(
             direcao * (forcaFinal / resistenciaInimigo),
-            ForceMode.Impulse
+            ForceMode.VelocityChange
         );
 
-        Debug.Log(gameObject.name + " empurrou");
-        Debug.Log("Distância: " + distancia);
+        Debug.Log("Força Base: " + bolinhaData.forcaEmpurrao);
+        Debug.Log("Bônus: " + bonusForca);
         Debug.Log("Força Final: " + forcaFinal);
+        Debug.Log("Distância: " + distancia);
     }
 
     public void ColetarMoeda()
