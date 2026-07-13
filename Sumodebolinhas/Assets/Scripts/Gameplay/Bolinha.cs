@@ -174,13 +174,13 @@ public class Bolinha : MonoBehaviour
 
         if (GameManager.Instance.vidasJogador1 <= 0)
         {
-            Debug.Log("JOGADOR 2 VENCEU!");
+            VictoryUI.Instance.MostrarVitoria("JOGADOR 2 VENCEU!");
             return;
         }
 
         if (GameManager.Instance.vidasJogador2 <= 0)
         {
-            Debug.Log("JOGADOR 1 VENCEU!");
+            VictoryUI.Instance.MostrarVitoria("JOGADOR 1 VENCEU!");
             return;
         }
 
