@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Gameplay.unity
     guid: 4b702278e99621749bbe1f36573b8f1d
   - enabled: 1
+    path: Assets/Scenes/GUI.unity
+    guid: a89f780cbe2800a498bcf3028d83ebab
+  - enabled: 1
     path: Assets/Scenes/Vitoria.unity
     guid: b6b782dfd076d8e47a75d529d56e5f15
   m_configObjects:

@@ -183,7 +183,7 @@ public class CharacterSelectionManager : MonoBehaviour
         {
             Debug.Log("Os dois jogadores confirmaram!");
 
-            SceneManager.LoadScene("Gameplay");
+            GameManager.Instance.IniciarGameplay();
         }
     }
 }
