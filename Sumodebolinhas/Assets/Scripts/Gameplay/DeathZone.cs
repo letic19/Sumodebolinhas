@@ -9,6 +9,8 @@ public class DeathZone : MonoBehaviour
         if (bolinha != null)
         {
             Debug.Log(bolinha.name + " caiu!");
+            
+            bolinha.Morrer();
         }
     }
 }

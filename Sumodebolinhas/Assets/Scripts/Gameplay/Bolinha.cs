@@ -4,6 +4,7 @@ public class Bolinha : MonoBehaviour
 {
     [SerializeField] private BolinhaData bolinhaData;
     [SerializeField] private PlayerInputHandler.PlayerType playerType;
+    [SerializeField] private Transform pontoRespawn;
     
     private Rigidbody rb;
     private Vector2 moveInput;
@@ -157,6 +158,8 @@ public class Bolinha : MonoBehaviour
 
     public void Morrer()
     {
+        Debug.Log(">>> Morrer foi chamado!");
+        
         if (playerType == PlayerInputHandler.PlayerType.Player1)
         {
             GameManager.Instance.vidasJogador1--;
@@ -182,7 +185,7 @@ public class Bolinha : MonoBehaviour
         }
 
         // Respawn
-        transform.position = Vector3.zero;
+        transform.position = pontoRespawn.position;
 
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.linearVelocity = Vector3.zero;
