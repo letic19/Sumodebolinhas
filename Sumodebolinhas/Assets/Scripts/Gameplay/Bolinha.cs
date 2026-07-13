@@ -39,6 +39,19 @@ public class Bolinha : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         transform.localScale = Vector3.one * bolinhaData.tamanho;
+        Renderer renderer = GetComponent<Renderer>();
+
+        if (renderer != null)
+        {
+            if (bolinhaData.material != null)
+            {
+                renderer.material = bolinhaData.material;
+            }
+            else
+            {
+                renderer.material.color = bolinhaData.cor;
+            }
+        }
 
         inputHandler = GetComponent<PlayerInputHandler>();
     }

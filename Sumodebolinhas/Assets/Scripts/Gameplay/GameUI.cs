@@ -8,6 +8,13 @@ public class GameUI : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance == null)
+        {
+            Debug.LogError("GameManager é NULL");
+            return;
+        }
+
+        Debug.Log("J1: " + vidasJogador1.Length);
         for (int i = 0; i < vidasJogador1.Length; i++)
         {
             vidasJogador1[i].enabled = i < GameManager.Instance.vidasJogador1;
