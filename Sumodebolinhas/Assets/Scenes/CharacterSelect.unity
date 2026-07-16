@@ -664,7 +664,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 102d7fffa76687b419a38c07e97a5469, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2968,7 +2968,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 102d7fffa76687b419a38c07e97a5469, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3475,8 +3475,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   bolinhaJogador1: {fileID: 0}
   bolinhaJogador2: {fileID: 0}
-  vidasJogador1: 3
-  vidasJogador2: 3
+  vitoriasJogador1: 0
+  vitoriasJogador2: 0
+  roundsParaVencerPartida: 2
+  vencedor: 
+  bolinhaVencedora: {fileID: 0}
 --- !u!4 &1709261350
 Transform:
   m_ObjectHideFlags: 0

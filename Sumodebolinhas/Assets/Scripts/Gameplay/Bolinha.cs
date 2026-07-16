@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Bolinha : MonoBehaviour
 {
@@ -83,6 +82,13 @@ public class Bolinha : MonoBehaviour
             inputHandler.OnMove += ReceberMovimento;
             inputHandler.OnPush += EmpurrarInimigo;
         }
+
+        // Observer: quando o GameManager avisa que um novo round começou,
+        // cada bolinha se reposiciona e reseta seu progresso do round anterior.
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnRoundReiniciado += Reiniciar;
+        }
     }
 
 
@@ -93,6 +99,11 @@ public class Bolinha : MonoBehaviour
         {
             inputHandler.OnMove -= ReceberMovimento;
             inputHandler.OnPush -= EmpurrarInimigo;
+        }
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnRoundReiniciado -= Reiniciar;
         }
     }
 
@@ -236,55 +247,45 @@ public class Bolinha : MonoBehaviour
 
 
 
+    /// <summary>
+    /// Chamado pela DeathZone quando a bolinha cai da arena.
+    /// Agora só avisa o GameManager, que decide o resultado do round/partida.
+    /// </summary>
     public void Morrer()
     {
-        Debug.Log(">>> Morrer foi chamado!");
+        Debug.Log(">>> " + gameObject.name + " caiu da arena!");
+
+        GameManager.Instance.RegistrarQueda(playerType);
+    }
 
 
 
-        if (playerType == PlayerInputHandler.PlayerType.Player1)
-        {
-            GameManager.Instance.vidasJogador1--;
-        }
-        else
-        {
-            GameManager.Instance.vidasJogador2--;
-        }
 
+    /// <summary>
+    /// Chamado via evento (OnRoundReiniciado) no início de cada novo round.
+    /// Reseta posição, velocidade e o progresso de moedas/bônus do round anterior,
+    /// pra cada round começar equilibrado.
+    /// </summary>
+    public void Reiniciar()
+    {
+        moedas = 0;
+        bonusForca = 0f;
+        bonusResistencia = 0f;
 
+        podeEmpurrar = true;
+        tempoAtualRecarga = 0f;
 
-        Debug.Log("Vidas J1: " + GameManager.Instance.vidasJogador1);
-        Debug.Log("Vidas J2: " + GameManager.Instance.vidasJogador2);
-
-
-
-        if (GameManager.Instance.vidasJogador1 <= 0)
-        {
-            GameManager.Instance.vencedor = "JOGADOR 2 VENCEU!";
-            SceneManager.LoadScene("Vitoria");
-            return;
-        }
-
-
-
-        if (GameManager.Instance.vidasJogador2 <= 0)
-        {
-            GameManager.Instance.vencedor = "JOGADOR 1 VENCEU!";
-            SceneManager.LoadScene("Vitoria");
-            return;
-        }
-
-
-
+        moveInput = Vector2.zero;
 
         if (pontoRespawn != null)
         {
             transform.position = pontoRespawn.position;
         }
 
-
-
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
     }
 }
