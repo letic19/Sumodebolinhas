@@ -12,6 +12,7 @@ public class CooldownBar : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log($"[CooldownBar] Start rodou! GameObject: {gameObject.name} | Jogador configurado: {jogador} | GameManager existe: {GameManager.Instance != null}");
         BuscarBolinha();
     }
 
@@ -27,7 +28,9 @@ public class CooldownBar : MonoBehaviour
                 return;
         }
 
-        slider.value = bolinha.GetPorcentagemRecarga();
+        float valor = bolinha.GetPorcentagemRecarga();
+        Debug.Log($"[CooldownBar - {jogador}] bolinha: {bolinha.name} | valor: {valor}");
+        slider.value = valor;
     }
 
     private void BuscarBolinha()
@@ -38,5 +41,7 @@ public class CooldownBar : MonoBehaviour
         bolinha = jogador == PlayerInputHandler.PlayerType.Player1
             ? GameManager.Instance.bolinhaInstanciaJogador1
             : GameManager.Instance.bolinhaInstanciaJogador2;
+
+        Debug.Log($"[CooldownBar - {jogador}] BuscarBolinha rodou. GameManager instance ID: {GameManager.Instance.GetInstanceID()} | Encontrou bolinha: {bolinha != null}");
     }
 }

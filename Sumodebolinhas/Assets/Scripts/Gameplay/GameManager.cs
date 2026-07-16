@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
 
     public void RegistrarBolinha(PlayerInputHandler.PlayerType tipo, Bolinha instancia)
     {
+        Debug.Log($"[GameManager] RegistrarBolinha chamado! Tipo: {tipo} | Instância: {instancia.name} | GameManager instance ID: {GetInstanceID()}");
+
         if (tipo == PlayerInputHandler.PlayerType.Player1)
             bolinhaInstanciaJogador1 = instancia;
         else

@@ -67,6 +67,10 @@ public class Bolinha : MonoBehaviour
 
 
         inputHandler = GetComponent<PlayerInputHandler>();
+
+        // Se registra no GameManager pra que objetos de OUTRAS cenas (ex: a UI,
+        // que fica numa cena separada) consigam encontrar essa bolinha em runtime.
+        GameManager.Instance.RegistrarBolinha(playerType, this);
     }
 
 
@@ -288,4 +292,4 @@ public class Bolinha : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
         }
     }
-}
+}s
