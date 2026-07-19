@@ -14,4 +14,8 @@ public class BolinhaData : ScriptableObject
     [Header("Aparência")]
     public Material material;      // Se existir, usa este material
     public Color cor = Color.white; // Caso não tenha material
+
+    [Header("Aparência Alternativa (usada quando os 2 jogadores escolhem a mesma bolinha)")]
+    public Material materialAlternativo;
+    public Color corAlternativa = Color.gray;
 }

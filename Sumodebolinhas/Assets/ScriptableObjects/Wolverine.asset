@@ -18,3 +18,5 @@ MonoBehaviour:
   icone: {fileID: 21300000, guid: f4b68e0d08d2e0a4aa7d07b56e66948b, type: 3}
   material: {fileID: 2100000, guid: cbd5b0979d5671042bc963c9340620aa, type: 2}
   cor: {r: 1, g: 1, b: 1, a: 0}
+  materialAlternativo: {fileID: 0}
+  corAlternativa: {r: 0.97735846, g: 0.8050662, b: 0.13092916, a: 1}

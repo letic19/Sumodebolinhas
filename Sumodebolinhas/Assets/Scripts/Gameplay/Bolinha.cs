@@ -51,19 +51,7 @@ public class Bolinha : MonoBehaviour
         transform.localScale = Vector3.one * bolinhaData.tamanho;
 
 
-        Renderer renderer = GetComponent<Renderer>();
-
-        if (renderer != null)
-        {
-            if (bolinhaData.material != null)
-            {
-                renderer.material = bolinhaData.material;
-            }
-            else
-            {
-                renderer.material.color = bolinhaData.cor;
-            }
-        }
+        AplicarAparencia();
 
 
         inputHandler = GetComponent<PlayerInputHandler>();
@@ -71,6 +59,45 @@ public class Bolinha : MonoBehaviour
         // Se registra no GameManager pra que objetos de OUTRAS cenas (ex: a UI,
         // que fica numa cena separada) consigam encontrar essa bolinha em runtime.
         GameManager.Instance.RegistrarBolinha(playerType, this);
+    }
+
+
+
+    /// <summary>
+    /// Decide se essa bolinha usa a aparência padrão ou a alternativa.
+    /// Regra: se os dois jogadores escolheram a MESMA bolinha, o Jogador 2
+    /// usa a aparência alternativa pra dar pra diferenciar visualmente quem é quem.
+    /// </summary>
+    private void AplicarAparencia()
+    {
+        Renderer renderer = GetComponent<Renderer>();
+
+        if (renderer == null)
+            return;
+
+        bool jogadoresEscolheramAMesmaBolinha =
+            GameManager.Instance.bolinhaJogador1 == GameManager.Instance.bolinhaJogador2;
+
+        bool usarAparenciaAlternativa =
+            jogadoresEscolheramAMesmaBolinha &&
+            playerType == PlayerInputHandler.PlayerType.Player2;
+
+        Material materialEscolhido = usarAparenciaAlternativa
+            ? bolinhaData.materialAlternativo
+            : bolinhaData.material;
+
+        Color corEscolhida = usarAparenciaAlternativa
+            ? bolinhaData.corAlternativa
+            : bolinhaData.cor;
+
+        if (materialEscolhido != null)
+        {
+            renderer.material = materialEscolhido;
+        }
+        else
+        {
+            renderer.material.color = corEscolhida;
+        }
     }
 
 
@@ -292,4 +319,4 @@ public class Bolinha : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
         }
     }
-}s
+}
