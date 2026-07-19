@@ -510,7 +510,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1005667385}
-  - component: {fileID: 1005667384}
+  - component: {fileID: 1005667386}
   m_Layer: 0
   m_Name: VictoryUI
   m_TagString: Untagged
@@ -518,20 +518,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1005667384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1005667383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86e27e22d6e908d45adb267c9f30f958, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VictoryUI
-  painelVitoria: {fileID: 975677338}
-  textoVitoria: {fileID: 1957042450}
 --- !u!4 &1005667385
 Transform:
   m_ObjectHideFlags: 0
@@ -547,6 +533,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1005667386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005667383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 199a0cfa991e8e94a9d6d7987c07978c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VictoryScene
+  textoVitoria: {fileID: 1957042450}
+  textoBolinhaVencedora: {fileID: 0}
 --- !u!1 &1129877849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,8 +1013,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1005667384}
-        m_TargetAssemblyTypeName: VictoryUI, Assembly-CSharp
+      - m_Target: {fileID: 1005667386}
+        m_TargetAssemblyTypeName: VictoryScene, Assembly-CSharp
         m_MethodName: VoltarParaSelecao
         m_Mode: 1
         m_Arguments:

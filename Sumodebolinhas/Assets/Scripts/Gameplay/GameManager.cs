@@ -15,8 +15,10 @@ public class GameManager : MonoBehaviour
     public int vitoriasJogador2 = 0;
 
     [Header("Configuração dos rounds")]
-    [Tooltip("Quantos rounds um jogador precisa vencer pra ganhar a partida. 2 = melhor de 3.")]
-    [SerializeField] private int roundsParaVencerPartida = 2;
+    [Tooltip("Quantos rounds compõem a partida. A partida só termina depois que todos forem jogados.")]
+    [SerializeField] private int totalDeRounds = 3;
+
+    private int roundsJogados = 0;
 
     [Header("Resultado final (lido pela cena de Vitória)")]
     public string vencedor;
@@ -66,6 +68,7 @@ public class GameManager : MonoBehaviour
         // Zera o placar da partida toda vez que uma nova partida começa
         vitoriasJogador1 = 0;
         vitoriasJogador2 = 0;
+        roundsJogados = 0;
         vencedor = string.Empty;
         bolinhaVencedora = null;
         bolinhaInstanciaJogador1 = null;
@@ -77,7 +80,9 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// Chamado pela Bolinha (via DeathZone) quando ela cai da arena.
-    /// Decide quem venceu o round, atualiza o placar e decide se a partida acabou.
+    /// Atualiza o placar do round. A partida só termina depois que TODOS os
+    /// rounds (totalDeRounds) forem jogados — mesmo que alguém já tenha
+    /// garantido a vitória antes, os jogadores continuam jogando os rounds restantes.
     /// </summary>
     public void RegistrarQueda(PlayerInputHandler.PlayerType jogadorQueCaiu)
     {
@@ -91,26 +96,31 @@ public class GameManager : MonoBehaviour
         else
             vitoriasJogador2++;
 
-        Debug.Log($"Round vencido por: {vencedorDoRound} | Placar -> J1: {vitoriasJogador1} | J2: {vitoriasJogador2}");
+        roundsJogados++;
+
+        Debug.Log($"[GameManager] Round {roundsJogados}/{totalDeRounds} vencido por: {vencedorDoRound} | Placar -> J1: {vitoriasJogador1} | J2: {vitoriasJogador2}");
 
         OnRoundVencido?.Invoke(vencedorDoRound);
 
-        bool jogador1VenceuPartida = vitoriasJogador1 >= roundsParaVencerPartida;
-        bool jogador2VenceuPartida = vitoriasJogador2 >= roundsParaVencerPartida;
-
-        if (jogador1VenceuPartida || jogador2VenceuPartida)
+        if (roundsJogados >= totalDeRounds)
         {
-            FinalizarPartida(vencedorDoRound);
+            Debug.Log("[GameManager] Todos os rounds foram jogados, finalizando a partida.");
+            FinalizarPartida();
         }
         else
         {
-            // Ainda não acabou a partida: avisa as bolinhas pra reiniciarem o round
+            // Ainda tem round pela frente: avisa as bolinhas pra reiniciarem
             OnRoundReiniciado?.Invoke();
         }
     }
 
-    private void FinalizarPartida(PlayerInputHandler.PlayerType vencedorPartida)
+    private void FinalizarPartida()
     {
+        PlayerInputHandler.PlayerType vencedorPartida =
+            vitoriasJogador1 >= vitoriasJogador2
+                ? PlayerInputHandler.PlayerType.Player1
+                : PlayerInputHandler.PlayerType.Player2;
+
         if (vencedorPartida == PlayerInputHandler.PlayerType.Player1)
         {
             vencedor = "JOGADOR 1 VENCEU!";
@@ -122,6 +132,8 @@ public class GameManager : MonoBehaviour
             bolinhaVencedora = bolinhaJogador2;
         }
 
+        Debug.Log($"[GameManager] Partida finalizada. Vencedor: {vencedor} | Carregando cena Vitoria...");
+
         OnPartidaVencida?.Invoke(vencedorPartida);
 
         SceneManager.LoadScene("Vitoria");
@@ -132,6 +144,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         vitoriasJogador1 = 0;
         vitoriasJogador2 = 0;
+        roundsJogados = 0;
         SceneManager.LoadScene("CharacterSelect");
     }
 }
