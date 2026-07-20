@@ -39,7 +39,7 @@ public class CharacterSelectionManager : MonoBehaviour
         Debug.Log("Awake: " + gameObject.name);
     }
 
-    // ---------------- JOGADOR 1 ----------------
+   
 
     public void ProximoJogador1()
     {

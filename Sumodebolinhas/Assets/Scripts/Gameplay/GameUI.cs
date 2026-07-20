@@ -10,7 +10,7 @@ public class GameUI : MonoBehaviour
 
     private void OnEnable()
     {
-        // Observer: a UI escuta o GameManager em vez de ficar checando toda hora no Update
+       
         if (GameManager.Instance != null)
         {
             GameManager.Instance.OnRoundVencido += AtualizarPlacar;

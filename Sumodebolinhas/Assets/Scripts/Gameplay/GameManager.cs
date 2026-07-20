@@ -25,10 +25,7 @@ public class GameManager : MonoBehaviour
     public BolinhaData bolinhaVencedora;
 
     [Header("Instâncias em jogo (preenchido em runtime)")]
-    // A cena "GUI" é separada da cena "Gameplay", então nada nela consegue
-    // arrastar uma referência de Bolinha no Inspector. Em vez disso, cada
-    // Bolinha se registra aqui assim que nasce, e quem precisar (ex: CooldownBar)
-    // busca a referência certa através do GameManager.
+ 
     public Bolinha bolinhaInstanciaJogador1;
     public Bolinha bolinhaInstanciaJogador2;
 
@@ -42,10 +39,7 @@ public class GameManager : MonoBehaviour
             bolinhaInstanciaJogador2 = instancia;
     }
 
-    // ---------------- OBSERVER ----------------
-    // Bolinha escuta OnRoundReiniciado pra se reposicionar/resetar no início de cada round.
-    // GameUI escuta OnRoundVencido pra atualizar o placar na tela.
-    // VictoryScene/VictoryUI podem escutar OnPartidaVencida se quiserem reagir sem depender só da troca de cena.
+    
     public event Action<PlayerInputHandler.PlayerType> OnRoundVencido;
     public event Action OnRoundReiniciado;
     public event Action<PlayerInputHandler.PlayerType> OnPartidaVencida;
@@ -65,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     public void IniciarGameplay()
     {
-        // Zera o placar da partida toda vez que uma nova partida começa
+        
         vitoriasJogador1 = 0;
         vitoriasJogador2 = 0;
         roundsJogados = 0;
@@ -78,12 +72,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("GUI", LoadSceneMode.Additive);
     }
 
-    /// <summary>
-    /// Chamado pela Bolinha (via DeathZone) quando ela cai da arena.
-    /// Atualiza o placar do round. A partida só termina depois que TODOS os
-    /// rounds (totalDeRounds) forem jogados — mesmo que alguém já tenha
-    /// garantido a vitória antes, os jogadores continuam jogando os rounds restantes.
-    /// </summary>
+    
     public void RegistrarQueda(PlayerInputHandler.PlayerType jogadorQueCaiu)
     {
         PlayerInputHandler.PlayerType vencedorDoRound =
@@ -109,7 +98,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // Ainda tem round pela frente: avisa as bolinhas pra reiniciarem
+            
             OnRoundReiniciado?.Invoke();
         }
     }

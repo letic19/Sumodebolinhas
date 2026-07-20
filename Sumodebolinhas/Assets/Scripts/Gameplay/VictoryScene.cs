@@ -19,7 +19,7 @@ public class VictoryScene : MonoBehaviour
         }
     }
 
-    // Ligar esse método no botão da cena de Vitória
+    
     public void VoltarParaSelecao()
     {
         GameManager.Instance.VoltarSelecao();

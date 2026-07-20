@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Bolinha : MonoBehaviour
 {
@@ -8,7 +10,6 @@ public class Bolinha : MonoBehaviour
 
     private Rigidbody rb;
     private Vector2 moveInput;
-    private PlayerInputHandler inputHandler;
 
     [SerializeField] private Bolinha inimigo;
     [SerializeField] private float tempoRecargaEmpurrao = 3f;
@@ -52,22 +53,14 @@ public class Bolinha : MonoBehaviour
 
 
         AplicarAparencia();
-
-
-        inputHandler = GetComponent<PlayerInputHandler>();
-
-        // Se registra no GameManager pra que objetos de OUTRAS cenas (ex: a UI,
-        // que fica numa cena separada) consigam encontrar essa bolinha em runtime.
+               
         GameManager.Instance.RegistrarBolinha(playerType, this);
     }
 
 
 
-    /// <summary>
-    /// Decide se essa bolinha usa a aparência padrão ou a alternativa.
-    /// Regra: se os dois jogadores escolheram a MESMA bolinha, o Jogador 2
-    /// usa a aparência alternativa pra dar pra diferenciar visualmente quem é quem.
-    /// </summary>
+   
+   
     private void AplicarAparencia()
     {
         Renderer renderer = GetComponent<Renderer>();
@@ -103,19 +96,7 @@ public class Bolinha : MonoBehaviour
 
 
     private void OnEnable()
-    {
-        if (inputHandler == null)
-            inputHandler = GetComponent<PlayerInputHandler>();
-
-
-        if (inputHandler != null)
-        {
-            inputHandler.OnMove += ReceberMovimento;
-            inputHandler.OnPush += EmpurrarInimigo;
-        }
-
-        // Observer: quando o GameManager avisa que um novo round começou,
-        // cada bolinha se reposiciona e reseta seu progresso do round anterior.
+    {     
         if (GameManager.Instance != null)
         {
             GameManager.Instance.OnRoundReiniciado += Reiniciar;
@@ -126,12 +107,6 @@ public class Bolinha : MonoBehaviour
 
     private void OnDisable()
     {
-        if (inputHandler != null)
-        {
-            inputHandler.OnMove -= ReceberMovimento;
-            inputHandler.OnPush -= EmpurrarInimigo;
-        }
-
         if (GameManager.Instance != null)
         {
             GameManager.Instance.OnRoundReiniciado -= Reiniciar;
@@ -143,6 +118,16 @@ public class Bolinha : MonoBehaviour
     private void ReceberMovimento(Vector2 direcao)
     {
         moveInput = direcao;
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        ReceberMovimento(context.ReadValue<Vector2>());
+    }
+
+    public void OnPush(InputAction.CallbackContext context)
+    {
+        if (context.performed) EmpurrarInimigo();
     }
 
 
@@ -266,6 +251,14 @@ public class Bolinha : MonoBehaviour
 
 
 
+    public int GetMoedas()
+    {
+        return moedas;
+    }
+
+
+
+
     public float GetPorcentagemRecarga()
     {
         if (podeEmpurrar)
@@ -278,10 +271,7 @@ public class Bolinha : MonoBehaviour
 
 
 
-    /// <summary>
-    /// Chamado pela DeathZone quando a bolinha cai da arena.
-    /// Agora só avisa o GameManager, que decide o resultado do round/partida.
-    /// </summary>
+  
     public void Morrer()
     {
         Debug.Log(">>> " + gameObject.name + " caiu da arena!");
@@ -292,11 +282,7 @@ public class Bolinha : MonoBehaviour
 
 
 
-    /// <summary>
-    /// Chamado via evento (OnRoundReiniciado) no início de cada novo round.
-    /// Reseta posição, velocidade e o progresso de moedas/bônus do round anterior,
-    /// pra cada round começar equilibrado.
-    /// </summary>
+  
     public void Reiniciar()
     {
         moedas = 0;
